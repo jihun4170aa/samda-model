@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이버 모델하우스 | 토지임대부 분양주택</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #6B4E50;
+            --primary-hover: #54393B;
+            --primary-light: #F5F0F0;
+            --accent-1: #7A7D7F;
+            --accent-2: #AE9E8E;
+            --accent-3: #D8D8D5;
+            --dark-color: #1a1a1a;
+            --gray-color: #666;
+            --light-gray: #F5F3F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        /* 헤더 */
+        .headerWrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .headerWrap.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            max-width: 1900px;
+            margin: 0 auto;
+            padding: 20px 80px 20px 10px;
+            display: grid;
+            grid-template-columns: 150px 1fr 150px;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            height: 50px;
+            margin-left: -40px;  /* 로고만 왼쪽으로 이동 */
+            width: 200px;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 100%;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s;
+        }
+
+        .headerWrap.scrolled .logo img {
+            filter: brightness(1) invert(0);
+        }
+
+        /* GNB 메뉴 */
+        #gnb {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            list-style: none;
+            position: relative;
+        }
+
+        #gnb > li {
+            position: relative;
+        }
+
+        #gnb > li > a {
+            text-decoration: none;
+            color: #F3F0E9;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 10px 0;
+            display: block;
+            text-align: center;
+        }
+
+        .headerWrap.scrolled #gnb > li > a {
+            color: #000;
+        }
+
+        #gnb > li > a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 서브메뉴 전체 영역 */
+        .submenu-area {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: #F3F0E9;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            transform: translateY(-10px);
+        }
+
+        .headerWrap.scrolled .submenu-area {
+            top: 80px;
+        }
+
+        #gnb:hover .submenu-area {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 80px;
+            display: grid;
+            grid-template-columns: 200px 1fr 150px;
+            gap: 40px;
+        }
+
+        .submenu-columns-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .submenu-column {
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .submenu-column h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .submenu-column ul {
+            list-style: none;
+        }
+
+        .submenu-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .submenu-column ul li a {
+            display: block;
+            padding: 8px 0;
+            color: #333;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+            text-align: center;
+        }
+
+        .submenu-column ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 메뉴 배경 딤드 */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 9998;
+        }
+
+        #gnb:hover ~ .menu-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tag {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
+            width: 150px;
+            justify-content: flex-end;
+        }
+
+        .tag .tel a {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .headerWrap.scrolled .tag .tel a {
+            color: var(--primary-color);
+        }
+
+        /* 햄버거 메뉴 버튼 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 10001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .headerWrap.scrolled .hamburger span {
+            background: #000;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* 모바일 사이드 메뉴 */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 10000;
+            transition: left 0.4s ease;
+            overflow-y: auto;
+            box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 30px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu-header img {
+            height: 40px;
+        }
+
+        .mobile-menu-list {
+            padding: 20px 0;
+        }
+
+        .mobile-menu-list > li {
+            list-style: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu-list > li > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-list > li > a:hover {
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-list > li > a i {
+            transition: transform 0.3s;
+        }
+
+        .mobile-menu-list > li.active > a i {
+            transform: rotate(180deg);
+        }
+
+        /* 모바일 서브메뉴 */
+        .mobile-sub-menu {
+            max-height: 0;
+            overflow: hidden;
+            background: #f8f9fa;
+            transition: max-height 0.4s ease;
+        }
+
+        .mobile-sub-menu.active {
+            max-height: 500px;
+        }
+
+        .mobile-sub-menu li {
+            list-style: none;
+        }
+
+        .mobile-sub-menu li a {
+            display: block;
+            padding: 12px 20px 12px 40px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .mobile-sub-menu li a:hover {
+            background: white;
+            color: var(--primary-color);
+            padding-left: 45px;
+        }
+
+        /* 모바일 메뉴 배경 */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 9999;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 플로팅 전화 버튼 */
+        .floating-call {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: 0 5px 25px rgba(56, 149, 211, 0.4);
+            align-items: center;
+            justify-content: center;
+            z-index: 9997;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 5px 25px rgba(56, 149, 211, 0.4);
+            }
+            50% {
+                box-shadow: 0 5px 35px rgba(56, 149, 211, 0.6);
+            }
+            100% {
+                box-shadow: 0 5px 25px rgba(56, 149, 211, 0.4);
+            }
+        }
+
+        /* Quick Menu */
+        .quick {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9998;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+
+        .quick ul {
+            list-style: none;
+        }
+
+        .quick ul li {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quick ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .quick ul li a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .quick ul li a:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .quick ul li a i {
+            color: var(--primary-color);
+        }
+
+        /* 섹션 공통 */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        /* 메인 비주얼 */
+        .main_visual {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .main_visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+        }
+
+        .visual-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+        }
+
+        .visual-text h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            font-family: 'Playfair Display', serif;
+            text-shadow:
+                3px 3px 6px rgba(0, 0, 0, 0.8),
+                0px 0px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .visual-text p {
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow:
+                2px 2px 4px rgba(0, 0, 0, 0.8),
+                0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Unit 섹션 */
+        .unit-section {
+            background: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+
+        .unit_wrap {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .section-header span {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--gray-color);
+        }
+
+        /* Unit 슬라이더 */
+        .unit_slider {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .unit_slider .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        .unit-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .unit-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background: #f8f8f8;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .unit-card img:hover {
+            opacity: 0.8;
+        }
+
+        .unit-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .unit-info h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .unit-info p {
+            font-size: 16px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        /* VR 섹션 */
+        .vr-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-1) 50%, var(--accent-2) 100%);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .vr-content {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .vr-content h2 {
+            font-size: 56px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .vr-content > p {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            opacity: 0.95;
+        }
+
+        .vr-placeholder {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 80px 60px;
+            border: 2px dashed rgba(255,255,255,0.3);
+        }
+
+        .vr-placeholder i {
+            font-size: 100px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .vr-placeholder h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .vr-placeholder p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 50px;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Location 섹션 */
+        .location-section {
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+
+        .inner_location {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .item_loca {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: all 0.4s;
+            height: 250px;
+        }
+
+        .item_loca:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .item_loca img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .txt_loca {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        .txt_loca p:first-child {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .txt_loca p:nth-child(2) {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .txt_loca span {
+            font-size: 12px;
+            opacity: 0.7;
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* 카카오맵 섹션 */
+        .map-section {
+            margin-top: 50px;
+        }
+
+        .map-section h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .map-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .map-info p {
+            font-size: 16px;
+            color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .map-info i {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        /* 이미지 확대 모달 */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: white;
+            color: #333;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .image-modal-close:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 60px 80px 30px;
+            scroll-snap-align: start;
+        }
+
+        .copy {
+            max-width: 1600px;
+            margin: 0 auto 30px;
+        }
+
+        .copy img {
+            height: 40px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .copy p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #bdc3c7;
+        }
+
+        .add {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add p {
+            font-size: 18px;
+        }
+
+        .add b {
+            font-size: 24px;
+            color: #ecf0f1;
+        }
+
+        /* Swiper 커스터마이징 */
+        .swiper-pagination-bullet {
+            background: var(--primary-color);
+            width: 12px;
+            height: 12px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--primary-color);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary-color);
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 20px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 1024px) {
+            .header {
+                padding: 20px 40px;
+            }
+
+            #gnb {
+                gap: 30px;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* 모바일에서 데스크톱 메뉴 숨김 */
+            #gnb,
+            .tag {
+                display: none;
+            }
+
+            /* 햄버거 메뉴 표시 */
+            .hamburger {
+                display: flex;
+            }
+
+            /* 플로팅 버튼 표시 */
+            .floating-call {
+                display: flex;
+            }
+
+            .header {
+                padding: 15px 20px;
+            }
+
+            .visual-text h1 {
+                font-size: 36px;
+            }
+
+            .visual-text p {
+                font-size: 16px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .vr-content h2 {
+                font-size: 36px;
+            }
+
+            .unit_wrap,
+            .inner_location,
+            footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .vr-placeholder {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Quick Menu (데스크톱만) -->
+    <div class="quick">
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fas fa-home" style="font-size: 24px;"></i>
+                    <div>HOME</div>
+                </a>
+            </li>
+            <li>
+                <a href="#unit">
+                    <i class="fas fa-th-large" style="font-size: 24px;"></i>
+                    <div>평면도</div>
+                </a>
+            </li>
+            <li>
+                <a href="#vr">
+                    <i class="fas fa-vr-cardboard" style="font-size: 24px;"></i>
+                    <div>VR</div>
+                </a>
+            </li>
+            <li>
+                <a href="#location">
+                    <i class="fas fa-map-marker-alt" style="font-size: 24px;"></i>
+                    <div>단지정보</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 플로팅 전화 버튼 (모바일만) -->
+    <a href="tel:1588-0000" class="floating-call">
+        <i class="fas fa-phone-alt"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="headerWrap" id="header_gnb">
+        <div class="header">
+            <!-- 햄버거 메뉴 (모바일) -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <h1 class="logo">
+                <a href="#home">
+                    <img src="Asset/공사 한글로고(개정)-좌우조합.png" alt="로고">
+                </a>
+            </h1>
+
+            <!-- 데스크톱 GNB -->
+            <ul id="gnb">
+                <li><a href="#home">사업안내</a></li>
+                <li><a href="#unit">단지정보</a></li>
+                <li><a href="#vr">세대안내</a></li>
+                <li><a href="#location">분양안내</a></li>
+
+                <!-- 전체 서브메뉴 영역 -->
+                <div class="submenu-area">
+                    <div class="submenu-container">
+                        <div></div>
+                        <div class="submenu-columns-wrapper">
+                            <div class="submenu-column">
+                                <ul>
+                                    <li><a href="#home">사업개요</a></li>
+                                    <li><a href="#home">토지임대부 소개</a></li>
+                                    <li><a href="#home">오시는길</a></li>
+                                </ul>
+                            </div>
+                            <div class="submenu-column">
+                                <ul>
+                                    <li><a href="#unit">단지조감도</a></li>
+                                    <li><a href="#unit">단지배치도</a></li>
+                                    <li><a href="#unit">동호수배치도</a></li>
+                                    <li><a href="#unit">커뮤니티</a></li>
+                                </ul>
+                            </div>
+                            <div class="submenu-column">
+                                <ul>
+                                    <li><a href="#unit">49타입 평면도</a></li>
+                                    <li><a href="#unit">59타입 평면도</a></li>
+                                    <li><a href="#vr">인테리어</a></li>
+                                    <li><a href="#vr">사이버 모델하우스</a></li>
+                                    <li><a href="#vr">마감재</a></li>
+                                </ul>
+                            </div>
+                            <div class="submenu-column">
+                                <ul>
+                                    <li><a href="#location">분양일정</a></li>
+                                    <li><a href="#location">입주자모집공고</a></li>
+                                    <li><a href="#location">청약안내</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </ul>
+
+            <ul class="tag">
+                <li class="tel"><a href="tel:1588-0000">1588-0000</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 메뉴 배경 딤드 -->
+    <div class="menu-overlay"></div>
+
+    <!-- 모바일 사이드 메뉴 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <img src="Asset/공사 한글로고(개정)-좌우조합.png" alt="로고">
+        </div>
+        <ul class="mobile-menu-list">
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    사업안내
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="#home">사업개요</a></li>
+                    <li><a href="#home">토지임대부 소개</a></li>
+                    <li><a href="#home">오시는길</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    단지정보
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="#unit">단지조감도</a></li>
+                    <li><a href="#unit">단지배치도</a></li>
+                    <li><a href="#unit">동호수배치도</a></li>
+                    <li><a href="#unit">커뮤니티</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    세대안내
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="#unit">49타입 평면도</a></li>
+                    <li><a href="#unit">59타입 평면도</a></li>
+                    <li><a href="#vr">인테리어</a></li>
+                    <li><a href="#vr">사이버 모델하우스</a></li>
+                    <li><a href="#vr">마감재</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    분양안내
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="#location">분양일정</a></li>
+                    <li><a href="#location">입주자모집공고</a></li>
+                    <li><a href="#location">청약안내</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 모바일 메뉴 배경 -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Main Visual -->
+    <section id="home" class="main_visual">
+        <img src="Asset/조감도.png" alt="조감도">
+        <div class="visual-text" data-aos="fade-up" data-aos-duration="1500">
+            <h1>삼도이동 공공주택</h1>
+            <p>집에서 편안하게 만나는 모델하우스</p>
+        </div>
+    </section>
+
+    <!-- Unit Plan Section -->
+    <section id="unit" class="unit-section">
+        <div class="unit_wrap">
+            <div class="section-header" data-aos="fade-up">
+                <p>완벽한 공간 설계</p>
+                <h2>UNIT PLAN</h2>
+                <span>
+                    프리미엄 라이프 스타일을 더해<br>
+                    품격 있는 삶을 디자인합니다.
+                </span>
+            </div>
+
+            <div class="swiper unit_slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="unit-card">
+                            <img src="Asset/49실내.png" alt="49타입">
+                            <div class="unit-info">
+                                <h3>49 TYPE</h3>
+                                <p>넓은 거실과 효율적인 공간 배치로 설계된<br>49평형 프리미엄 주거공간</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="unit-card">
+                            <img src="Asset/59실내.png" alt="59타입">
+                            <div class="unit-info">
+                                <h3>59 TYPE</h3>
+                                <p>여유로운 공간 활용과 프라이버시를 고려한<br>59평형 특화 설계</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VR Section -->
+    <section id="vr" class="vr-section">
+        <div class="vr-content">
+            <div data-aos="fade-up">
+                <h2>360° VR 모델하우스</h2>
+                <p>
+                    생생한 가상현실로 경험하는 우리집<br>
+                    실제와 같은 공간감을 느껴보세요
+                </p>
+            </div>
+            <div class="vr-placeholder" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-vr-cardboard"></i>
+                <h3>VR 뷰어 준비중</h3>
+                <p>360도 파노라마 이미지를 통해 실제와 같은 공간감을 경험하실 수 있습니다.</p>
+                <span class="coming-soon">COMING SOON</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location-section">
+        <div class="inner_location">
+            <div class="section-header" data-aos="fade-up">
+                <p>단지 안내</p>
+                <h2>LOCATION</h2>
+                <span>
+                    최고급 주거 환경과 편리한 생활 인프라가<br>
+                    완벽하게 조화를 이룹니다
+                </span>
+            </div>
+
+            <div class="location-grid">
+                <div class="item_loca" data-aos="fade-up" data-aos-delay="100">
+                    <img src="Asset/조감도.png" alt="조감도">
+                    <div class="txt_loca">
+                        <p>프리미엄 단지</p>
+                        <p>최고급 주거 환경</p>
+                        <span>※ 이미지는 소비자의 이해를 돕기 위한 것으로 실제와 다를 수 있습니다.</span>
+                    </div>
+                </div>
+                <div class="item_loca" data-aos="fade-up" data-aos-delay="200">
+                    <img src="Asset/49실내.png" alt="49타입">
+                    <div class="txt_loca">
+                        <p>49 TYPE</p>
+                        <p>효율적인 공간 설계</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 지도 -->
+            <div class="map-section" data-aos="fade-up" data-aos-delay="300">
+                <h3>오시는 길</h3>
+                <div id="map" style="width:100%;height:400px;margin-top:20px;border-radius:20px;overflow:hidden;background:#f5f5f5;"></div>
+                <div class="map-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 주소: 제주특별자치도 제주시 삼도이동 1244-1</p>
+                    <p><i class="fas fa-phone"></i> 전화: 1588-0000</p>
+                    <p style="margin-top:15px;">
+                        <a href="https://map.naver.com/p/entry/address/3yYnSQ,2y2apo,%EC%A0%9C%EC%A3%BC%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%A0%9C%EC%A3%BC%EC%8B%9C%20%EC%82%BC%EB%8F%842%EB%8F%99%201244-1?c=15.00,0,0,0,dh" target="_blank" style="display:inline-block;padding:10px 20px;background:var(--primary-color);color:white;border-radius:5px;text-decoration:none;transition:all 0.3s;">
+                            <i class="fas fa-external-link-alt"></i> 네이버 지도에서 크게 보기
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 이미지 확대 모달 -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <button class="image-modal-close" id="modalClose">&times;</button>
+            <img id="modalImage" src="" alt="확대 이미지">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <img src="Asset/공사 한글로고(개정)-좌우조합.png" alt="로고">
+            <p>
+                토지임대부 분양주택 | 분양문의: 1588-0000<br>
+                평일 09:00 ~ 18:00 / 주말 및 공휴일 휴무<br><br>
+                본 홈페이지는 토지임대부 분양주택 공식 홈페이지입니다.
+            </p>
+        </div>
+        <div class="add">
+            <p><b>1588-0000</b></p>
+            <p><b>49 ~ 59평형 분양</b></p>
+        </div>
+    </footer>
+
+    <!-- JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        // AOS 초기화
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 100
+        });
+
+        // Swiper 초기화
+        const unitSwiper = new Swiper('.unit_slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+        });
+
+        // 헤더 스크롤 효과
+        const header = document.querySelector('.headerWrap');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 햄버거 메뉴 토글
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+        });
+
+        mobileOverlay.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            this.classList.remove('active');
+        });
+
+        // 모바일 서브메뉴 아코디언
+        const mobileTriggers = document.querySelectorAll('.mobile-menu-trigger');
+
+        mobileTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                const subMenu = parent.querySelector('.mobile-sub-menu');
+
+                // 다른 메뉴들 닫기
+                mobileTriggers.forEach(otherTrigger => {
+                    if (otherTrigger !== trigger) {
+                        otherTrigger.parentElement.classList.remove('active');
+                        otherTrigger.parentElement.querySelector('.mobile-sub-menu').classList.remove('active');
+                    }
+                });
+
+                // 현재 메뉴 토글
+                parent.classList.toggle('active');
+                subMenu.classList.toggle('active');
+            });
+        });
+
+        // 모바일 서브메뉴 링크 클릭시 메뉴 닫기
+        const mobileSubLinks = document.querySelectorAll('.mobile-sub-menu a');
+
+        mobileSubLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+            });
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 네이버 Static Map (HTTP Referer 인증 방식)
+        function loadMap() {
+            const mapContainer = document.getElementById('map');
+            if (mapContainer) {
+                const lat = 33.5137;
+                const lon = 126.5219;
+                const zoom = 16;
+
+                // HTTP Referer 인증 방식 (/raster-cors 사용 - Client ID 불필요)
+                const mapUrl = `https://maps.apigw.ntruss.com/map-static/v2/raster-cors?` +
+                    `w=800&h=400&center=${lon},${lat}&level=${zoom}` +
+                    `&markers=type:d|size:mid|pos:${lon}%20${lat}`;
+
+                mapContainer.innerHTML = `<img src="${mapUrl}" alt="네이버 지도" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">`;
+            }
+        }
+
+        // 페이지 로드 시 지도 로드
+        window.addEventListener('load', function() {
+            loadMap();
+        });
+
+        // 이미지 모달 기능
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const unitImages = document.querySelectorAll('.unit-card img');
+
+        // 평면도 이미지 클릭 시 모달 열기
+        unitImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modalImage.src = this.src;
+                imageModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // 스크롤 방지
+            });
+        });
+
+        // 닫기 버튼 클릭
+        modalClose.addEventListener('click', function() {
+            imageModal.classList.remove('active');
+            document.body.style.overflow = ''; // 스크롤 복원
+        });
+
+        // 배경 클릭 시 닫기
+        imageModal.addEventListener('click', function(e) {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ESC 키로 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && imageModal.classList.contains('active')) {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

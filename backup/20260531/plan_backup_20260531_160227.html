@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세대안내 - 삼도이동 공공주택 건립사업</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- 네이버 지도 API -->
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nticxunj9s"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6B4E50;
+            --primary-hover: #54393B;
+            --primary-light: #F5F0F0;
+            --accent-1: #7A7D7F;
+            --accent-2: #AE9E8E;
+            --dark-color: #1a1a1a;
+            --gray-color: #666;
+            --light-gray: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: #fff;
+        }
+
+        /* Header */
+        .headerWrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            max-width: 1900px;
+            margin: 0 auto;
+            padding: 20px 80px 20px 40px;
+            display: grid;
+            grid-template-columns: 500px 1fr 150px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            width: 200px;
+            padding-right: 500px;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 100%;
+            padding: 0px;
+        }
+
+        #gnb {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            list-style: none;
+        }
+
+        #gnb > li {
+            position: relative;
+            text-align: center;
+        }
+
+        #gnb > li > a {
+            display: block;
+            padding: 10px 0;
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        #gnb > li > a:hover,
+        #gnb > li > a.active {
+            color: var(--primary-color);
+        }
+
+        /* 서브메뉴 전체 영역 */
+        .submenu-area {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9998;
+            transform: translateY(-10px);
+        }
+
+        #gnb:hover .submenu-area {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-container {
+            max-width: 1900px;
+            margin: 0 auto;
+            padding: 10px 80px 10px 40px;
+            display: grid;
+            grid-template-columns: 500px 1fr 150px;
+            gap: 40px;
+        }
+
+        .submenu-columns-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .submenu-column {
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .submenu-column h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .submenu-column ul {
+            list-style: none;
+        }
+
+        .submenu-column ul li {
+            margin: 10px 0;
+        }
+
+        .submenu-column ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .submenu-column ul li a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .tag {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
+            width: 150px;
+            justify-content: flex-end;
+        }
+
+        .tag .tel a {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        /* 햄버거 메뉴 버튼 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 10001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark-color);
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* 모바일 사이드 메뉴 */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 10000;
+            transition: left 0.4s ease;
+            overflow-y: auto;
+            box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 30px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu-header img {
+            height: 40px;
+        }
+
+        .mobile-menu-list {
+            padding: 20px 0;
+        }
+
+        .mobile-menu-list > li {
+            list-style: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu-list > li > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-list > li > a:hover {
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-list > li > a i {
+            transition: transform 0.3s;
+        }
+
+        .mobile-menu-list > li.active > a i {
+            transform: rotate(180deg);
+        }
+
+        /* 모바일 서브메뉴 */
+        .mobile-sub-menu {
+            max-height: 0;
+            overflow: hidden;
+            background: #f8f9fa;
+            transition: max-height 0.4s ease;
+        }
+
+        .mobile-sub-menu.active {
+            max-height: 500px;
+        }
+
+        .mobile-sub-menu li {
+            list-style: none;
+        }
+
+        .mobile-sub-menu li a {
+            display: block;
+            padding: 12px 20px 12px 40px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .mobile-sub-menu li a:hover {
+            background: white;
+            color: var(--primary-color);
+            padding-left: 45px;
+        }
+
+        /* 모바일 메뉴 배경 */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Page Header with Integrated Tabs */
+        .page-header-with-tabs {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 30px 80px 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+
+        .header-left {
+            padding-bottom: 20px;
+        }
+
+        .header-left h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .header-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .main-tab-button {
+            padding: 20px 35px;
+            font-size: 17px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .main-tab-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .main-tab-button.active {
+            background: white;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Main Tab Content */
+        .main-tab-content {
+            display: none;
+        }
+
+        .main-tab-content.active {
+            display: block;
+        }
+
+        /* Sub Tab Navigation (2단계) */
+        .tab-navigation {
+            max-width: 1600px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 200px;
+            justify-content: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gray-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .tab-button:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* District Content */
+        .district-content {
+            display: none;
+            max-width: 1500px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .district-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .district-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* District Image */
+        .district-image {
+            width: 100%;
+        }
+
+        .district-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .district-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .info-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .info-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .info-card-content {
+            font-size: 16px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        .info-card-content strong {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .info-highlight {
+            background: var(--primary-light);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .info-highlight p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 5px 0;
+        }
+
+        /* Floating Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(107, 78, 80, 0.4);
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .floating-btn:hover {
+            background: var(--primary-hover);
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .header-content {
+                grid-template-columns: auto 1fr auto;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .logo {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            #gnb {
+                display: none;
+            }
+
+            .tag {
+                display: none;
+            }
+
+            .header {
+                grid-template-columns: auto 1fr;
+                justify-content: flex-start;
+            }
+
+            .page-header-with-tabs {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 20px 0;
+            }
+
+            .header-left {
+                padding-bottom: 20px;
+            }
+
+            .header-left h1 {
+                font-size: 32px;
+            }
+
+            .header-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .main-tab-button {
+                padding: 15px 25px;
+                font-size: 15px;
+                white-space: nowrap;
+            }
+
+            .tabs {
+                gap: 10px;
+            }
+
+            .tab-button {
+                padding: 15px 30px;
+                font-size: 18px;
+            }
+
+            .district-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .district-image {
+                position: static;
+            }
+
+            .info-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .info-card {
+                padding: 25px;
+            }
+
+            .info-card-title {
+                font-size: 18px;
+            }
+
+            .info-card-content {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header {
+                padding: 60px 10px 10px;
+            }
+
+            .page-header h1 {
+                font-size: 26px;
+            }
+
+            .tab-button {
+                padding: 15px 25px;
+                font-size: 16px;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .info-card {
+                padding: 20px;
+            }
+
+            .info-card-header {
+                gap: 10px;
+            }
+
+            .info-card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        /* Mobile Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        .menu-overlay.active {
+            display: block;
+        }
+
+        /* 토지임대부 소개 스타일 */
+        .land-intro {
+            max-width: 1500px;
+            margin: 20px auto 100px;
+            padding: 0 20px;
+        }
+
+        .land-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .land-hero h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .land-hero p {
+            font-size: 18px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        .land-image-section {
+            margin-bottom: 60px;
+        }
+
+        .land-image-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .land-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        /* 오시는 길 스타일 */
+        .location-section {
+            max-width: 1500px;
+            margin: 20px auto 100px;
+            padding: 0 20px;
+        }
+
+        .map-container {
+            margin-bottom: 40px;
+        }
+
+        #locationMap {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .location-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .location-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .location-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .location-card h3 i {
+            font-size: 24px;
+        }
+
+        .location-card p {
+            font-size: 16px;
+            color: var(--dark-color);
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .location-card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .location-card a:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* 반응형 */
+        @media (max-width: 968px) {
+            .land-features,
+            .location-info {
+                grid-template-columns: 1fr;
+            }
+
+            .land-hero h2 {
+                font-size: 28px;
+            }
+
+            #locationMap {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .feature-card {
+                padding: 25px;
+            }
+
+            .land-hero h2 {
+                font-size: 24px;
+            }
+
+            #locationMap {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="headerWrap">
+        <div class="header">
+            <!-- 햄버거 메뉴 (모바일) -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Asset/공사 한글로고(개정)-좌우조합.png" alt="제주특별자치도개발공사">
+                </a>
+            </div>
+
+            <nav>
+                <ul id="gnb">
+                    <li>
+                        <a href="about.html#overview">사업안내</a>
+                    </li>
+                    <li>
+                        <a href="unit.html#birdview">단지정보</a>
+                    </li>
+                    <li>
+                        <a href="plan.html#type49" class="active">세대안내</a>
+                    </li>
+                    <li>
+                        <a href="sale.html#schedule">분양안내</a>
+                    </li>
+
+                    <!-- 전체 서브메뉴 영역 -->
+                    <div class="submenu-area">
+                        <div class="submenu-container">
+                            <div></div>
+                            <div class="submenu-columns-wrapper">
+                                <div class="submenu-column">
+                                    <ul>
+                                        <li><a href="about.html#overview">사업개요</a></li>
+                                        <li><a href="about.html#landintro">토지임대부 소개</a></li>
+                                        <li><a href="about.html#location">오시는길</a></li>
+                                    </ul>
+                                </div>
+                                <div class="submenu-column">
+                                    <ul>
+                                        <li><a href="unit.html#birdview">단지조감도</a></li>
+                                        <li><a href="unit.html#layout">단지배치도</a></li>
+                                        <li><a href="unit.html#dong">동호수배치도</a></li>
+                                        <li><a href="unit.html#community">커뮤니티</a></li>
+                                    </ul>
+                                </div>
+                                <div class="submenu-column">
+                                    <ul>
+                                        <li><a href="plan.html#type49">49타입</a></li>
+                                        <li><a href="plan.html#type59">59타입</a></li>
+                                        <li><a href="plan.html#interior">인테리어</a></li>
+                                        <li><a href="plan.html#vr">사이버 모델하우스</a></li>
+                                        <li><a href="plan.html#material">마감재</a></li>
+                                    </ul>
+                                </div>
+                                <div class="submenu-column">
+                                    <ul>
+                                        <li><a href="sale.html#schedule">분양일정</a></li>
+                                        <li><a href="sale.html#notice">입주자모집공고</a></li>
+                                        <li><a href="sale.html#subscription">청약안내</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+
+            <ul class="tag">
+                <li class="tel"><a href="tel:1588-0000">1588-0000</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 모바일 사이드 메뉴 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html">
+                <img src="Asset/공사 한글로고(개정)-좌우조합.png" alt="로고">
+            </a>
+        </div>
+        <ul class="mobile-menu-list">
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    사업안내
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="about.html#overview">사업개요</a></li>
+                    <li><a href="about.html#landintro">토지임대부 소개</a></li>
+                    <li><a href="about.html#location">오시는길</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    단지정보
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="unit.html#birdview">단지조감도</a></li>
+                    <li><a href="unit.html#layout">단지배치도</a></li>
+                    <li><a href="unit.html#dong">동호수배치도</a></li>
+                    <li><a href="unit.html#community">커뮤니티</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    세대안내
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="plan.html#type49">49타입</a></li>
+                    <li><a href="plan.html#type59">59타입</a></li>
+                    <li><a href="plan.html#interior">인테리어</a></li>
+                    <li><a href="plan.html#vr">사이버 모델하우스</a></li>
+                    <li><a href="plan.html#material">마감재</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="mobile-menu-trigger">
+                    분양안내
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="sale.html#schedule">분양일정</a></li>
+                    <li><a href="sale.html#notice">입주자모집공고</a></li>
+                    <li><a href="sale.html#subscription">청약안내</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 모바일 메뉴 배경 -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header with Integrated Tabs -->
+        <section class="page-header-with-tabs" data-aos="fade-down">
+            <div class="header-left">
+                <h1>세대안내</h1>
+            </div>
+            <div class="header-tabs">
+                <button class="main-tab-button active" data-maintab="type49">49타입</button>
+                <button class="main-tab-button" data-maintab="type59">59타입</button>
+                <button class="main-tab-button" data-maintab="interior">인테리어</button>
+                <button class="main-tab-button" data-maintab="vr">사이버 모델하우스</button>
+                <button class="main-tab-button" data-maintab="material">마감재</button>
+            </div>
+        </section>
+
+        <!-- 49타입 Tab Content -->
+        <div class="main-tab-content active" id="type49">
+            <!-- Sub Tab Navigation (2단계) -->
+            <div class="tab-navigation" data-aos="fade-up">
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="district1">1지구</button>
+                    <button class="tab-button" data-tab="district2">2지구</button>
+                </div>
+
+            <!-- District 1 Content -->
+            <div class="district-content active" id="district1">
+                <div class="district-layout">
+                    <div class="district-image" data-aos="fade-right">
+                        <img src="Asset/1지구 이미지.png" alt="1지구 조감도">
+                    </div>
+
+                    <div class="info-cards" data-aos="fade-left">
+                        <!-- 1행 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="info-card-title">사업명</div>
+                            </div>
+                            <div class="info-card-content">
+                                삼도이동 공공주택 건립사업 1지구
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info-card-title">위치</div>
+                            </div>
+                            <div class="info-card-content">
+                                제주특별자치도 삼도이동 1244-1번지
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="info-card-title">지역지구</div>
+                            </div>
+                            <div class="info-card-content">
+                                준주거지역, 고도지구(30m이하)
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="info-card-title">구조</div>
+                            </div>
+                            <div class="info-card-content">
+                                철근콘크리트(벽식구조)
+                            </div>
+                        </div>
+
+                        <!-- 2행 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="info-card-title">규모</div>
+                            </div>
+                            <div class="info-card-content">
+                                1개동, 지하1층(기계실) - 지상9층
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="info-card-title">세대수</div>
+                            </div>
+                            <div class="info-card-content">
+                                총 32세대 (49타입 8세대, 59타입 24세대)
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                </div>
+                                <div class="info-card-title">대지면적</div>
+                            </div>
+                            <div class="info-card-content">
+                                1,419.2㎡
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-ruler-combined"></i>
+                                </div>
+                                <div class="info-card-title">건축면적</div>
+                            </div>
+                            <div class="info-card-content">
+                                467.25㎡
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- District 2 Content -->
+            <div class="district-content" id="district2">
+                <div class="district-layout">
+                    <div class="district-image" data-aos="fade-right">
+                        <img src="Asset/2지구 이미지.png" alt="2지구 조감도">
+                    </div>
+
+                    <div class="info-cards" data-aos="fade-left">
+                        <!-- 1행 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="info-card-title">사업명</div>
+                            </div>
+                            <div class="info-card-content">
+                                삼도이동 공공주택 건립사업 2지구
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info-card-title">위치</div>
+                            </div>
+                            <div class="info-card-content">
+                                제주특별자치도 삼도이동 1246-1번지 외 4필지
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="info-card-title">지역지구</div>
+                            </div>
+                            <div class="info-card-content">
+                                준주거지역, 고도지구(30m이하)
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="info-card-title">구조</div>
+                            </div>
+                            <div class="info-card-content">
+                                철근콘크리트(벽식구조)
+                            </div>
+                        </div>
+
+                        <!-- 2행 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="info-card-title">규모</div>
+                            </div>
+                            <div class="info-card-content">
+                                1개동, 지하1층(기계실) - 지상9층
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="info-card-title">세대수</div>
+                            </div>
+                            <div class="info-card-content">
+                                총 40세대 (49타입 8세대, 59타입 32세대)
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                </div>
+                                <div class="info-card-title">대지면적</div>
+                            </div>
+                            <div class="info-card-content">
+                                1,947.2㎡
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-ruler-combined"></i>
+                                </div>
+                                <div class="info-card-title">건축면적</div>
+                            </div>
+                            <div class="info-card-content">
+                                586.91㎡
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- 59타입 Tab Content -->
+        <div class="main-tab-content" id="type59">
+            <div class="land-intro">
+                <!-- Hero Section -->
+                <div class="land-hero" data-aos="fade-up">
+                    <h2>토지임대부 분양주택</h2>
+                    <p class="land-subtitle">토지는 빌리고, 집은 내 것으로</p>
+                    <p class="land-description">
+                        토지임대부 분양주택은 공공이 소유한 토지 위에 건물만 분양받아 주택을 소유하는 새로운 주거 모델입니다.
+                        토지 구입 비용이 없어 초기 자금 부담을 크게 줄이면서도, 건물은 완전한 내 소유로 안정적인 주거 환경을 제공합니다.
+                    </p>
+                </div>
+
+                <!-- Image Section -->
+                <div class="land-image-section" data-aos="fade-up" data-aos-delay="100">
+                    <img src="Asset/토지임대부.png" alt="토지임대부 분양주택 안내">
+                </div>
+
+                <!-- Features Section -->
+                <div class="land-features" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <h3>확 줄어든 초기 자금 부담</h3>
+                        <p>토지 구입 비용 없이 건물 가격만 부담하여 일반 분양 대비 30~40% 저렴하게 내 집 마련이 가능합니다.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>진짜 내 집이 주는 안정감</h3>
+                        <p>건물은 완전한 소유권으로 자유롭게 매매, 증여, 상속이 가능하며 월세 걱정 없이 평생 거주할 수 있습니다.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>합리적인 주거비 구조</h3>
+                        <p>토지 임대료는 시세의 1~2% 수준으로 관리비와 함께 납부하며, 매달 납부하는 월세보다 훨씬 저렴합니다.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>공공이 보증하는 투명한 주거</h3>
+                        <p>제주특별자치도개발공사가 토지를 소유·관리하여 안정적이며, 임대료 인상률도 법으로 제한되어 있어 안심할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 인테리어 Tab Content -->
+        <div class="main-tab-content" id="interior">
+            <div class="location-section">
+                <!-- Map Container -->
+                <div class="map-container" data-aos="fade-up">
+                    <div id="locationMap"></div>
+                </div>
+
+                <!-- Location Info -->
+                <div class="location-info" data-aos="fade-up" data-aos-delay="100">
+                    <div class="location-card">
+                        <div class="location-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="location-details">
+                            <h3>주소</h3>
+                            <p>제주특별자치도 제주시 삼도이동 1244-1</p>
+                            <a href="https://map.naver.com/p/search/제주특별자치도 제주시 삼도이동 1244-1" target="_blank" class="map-link">
+                                <i class="fas fa-external-link-alt"></i> 네이버 지도에서 크게 보기
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="location-card">
+                        <div class="location-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="location-details">
+                            <h3>분양 문의</h3>
+                            <p>1588-0000</p>
+                            <p class="info-time">평일 09:00 - 18:00 (주말 및 공휴일 휴무)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 사이버 모델하우스 Tab Content -->
+        <div class="main-tab-content" id="vr">
+            <div class="land-intro">
+                <div class="land-hero" data-aos="fade-up">
+                    <h2>사이버 모델하우스</h2>
+                    <p class="land-subtitle">360° VR로 체험하는 우리집</p>
+                    <p class="land-description">
+                        실제와 같은 공간감을 가상현실로 경험해보세요.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 마감재 Tab Content -->
+        <div class="main-tab-content" id="material">
+            <div class="land-intro">
+                <div class="land-hero" data-aos="fade-up">
+                    <h2>마감재</h2>
+                    <p class="land-subtitle">프리미엄 마감재로 완성하는 품격</p>
+                    <p class="land-description">
+                        고급스러운 마감재로 주거 공간의 가치를 높입니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>제주특별자치도개발공사 | 주소: 제주특별자치도 제주시</p>
+            <p>분양문의: 1588-0000 | 사업승인번호: 제주시-2024-0000호</p>
+            <p>&copy; 2024 Jeju Free International City Development Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Call Button -->
+    <a href="tel:1588-0000" class="floating-btn">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <!-- AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Main Tab Switching (1단계)
+        const mainTabButtons = document.querySelectorAll('.main-tab-button');
+        const mainTabContents = document.querySelectorAll('.main-tab-content');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all main tab buttons and contents
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Show corresponding main tab content
+                const mainTabId = button.getAttribute('data-maintab');
+                document.getElementById(mainTabId).classList.add('active');
+
+                // Initialize map if location tab is activated
+                if (mainTabId === 'location') {
+                    setTimeout(loadLocationMap, 100);
+                }
+
+                // Reset AOS animations for new content
+                AOS.refresh();
+            });
+        });
+
+        // Sub Tab Switching (2단계 - 사업개요 내 1지구/2지구)
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const districtContents = document.querySelectorAll('.district-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                districtContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+
+                // Reset AOS animations for new content
+                AOS.refresh();
+            });
+        });
+
+        // Load Naver Map for Location Tab
+        function loadLocationMap() {
+            const mapContainer = document.getElementById('locationMap');
+            if (mapContainer && !mapContainer.hasChildNodes()) {
+                const lat = 33.5178023;
+                const lon = 126.5184526;
+
+                var mapOptions = {
+                    center: new naver.maps.LatLng(lat, lon),
+                    zoom: 16,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: naver.maps.Position.TOP_RIGHT
+                    }
+                };
+
+                var map = new naver.maps.Map(mapContainer, mapOptions);
+
+                var marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(lat, lon),
+                    map: map,
+                    title: '삼도이동 공공주택'
+                });
+
+                var infoWindow = new naver.maps.InfoWindow({
+                    content: '<div style="padding:10px;font-size:14px;"><strong>삼도이동 공공주택 건립사업</strong><br>제주시 삼도이동 1244-1</div>'
+                });
+
+                naver.maps.Event.addListener(marker, 'click', function() {
+                    if (infoWindow.getMap()) {
+                        infoWindow.close();
+                    } else {
+                        infoWindow.open(map, marker);
+                    }
+                });
+            }
+        }
+
+        // Handle URL hash to open correct tab
+        function handleTabFromHash() {
+            const hash = window.location.hash.substring(1); // Remove '#'
+            if (hash && ['type49', 'type59', 'interior', 'vr', 'material'].includes(hash)) {
+                // Remove active class from all main tabs
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+
+                // Find and activate the corresponding tab
+                const targetButton = document.querySelector(`[data-maintab="${hash}"]`);
+                const targetContent = document.getElementById(hash);
+
+                if (targetButton && targetContent) {
+                    targetButton.classList.add('active');
+                    targetContent.classList.add('active');
+
+                    // Load map if location tab
+                    if (hash === 'location') {
+                        setTimeout(loadLocationMap, 100);
+                    }
+
+                    // Reset AOS animations
+                    AOS.refresh();
+                }
+
+                // Force scroll to top
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 0);
+            }
+        }
+
+        // Prevent default scroll behavior when clicking hash links
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a[href*="#"]');
+            if (link) {
+                const href = link.getAttribute('href');
+                const hash = href.substring(href.indexOf('#') + 1);
+
+                if (['type49', 'type59', 'interior', 'vr', 'material'].includes(hash)) {
+                    e.preventDefault();
+
+                    // Update URL without scrolling
+                    history.pushState(null, null, '#' + hash);
+
+                    // Handle tab change
+                    handleTabFromHash();
+                }
+            }
+        });
+
+        // Run on page load
+        window.addEventListener('load', function() {
+            handleTabFromHash();
+        });
+
+        // Run when hash changes (back/forward buttons)
+        window.addEventListener('hashchange', function() {
+            handleTabFromHash();
+        });
+
+        // 햄버거 메뉴 토글
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+        });
+
+        mobileOverlay.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            this.classList.remove('active');
+        });
+
+        // 모바일 서브메뉴 토글
+        const mobileTriggers = document.querySelectorAll('.mobile-menu-trigger');
+        mobileTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const parent = this.parentElement;
+                const subMenu = parent.querySelector('.mobile-sub-menu');
+
+                // 현재 열린 다른 메뉴 닫기
+                document.querySelectorAll('.mobile-menu-list > li').forEach(item => {
+                    if (item !== parent) {
+                        item.classList.remove('active');
+                        item.querySelector('.mobile-sub-menu')?.classList.remove('active');
+                    }
+                });
+
+                // 현재 메뉴 토글
+                parent.classList.toggle('active');
+                subMenu.classList.toggle('active');
+            });
+        });
+
+        // 모바일 서브메뉴 링크 클릭 시 메뉴 닫기
+        const mobileSubLinks = document.querySelectorAll('.mobile-sub-menu a');
+        mobileSubLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
