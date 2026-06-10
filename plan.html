@@ -948,6 +948,308 @@
             transform: translateY(-2px);
         }
 
+        /* 평면도 레이아웃 스타일 */
+        .plan-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .plan-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .plan-specs {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .plan-specs h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .spec-table tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .spec-table tr:hover {
+            background: var(--primary-light);
+        }
+
+        .spec-table th {
+            text-align: left;
+            padding: 15px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-color);
+            width: 40%;
+        }
+
+        .spec-table th i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .spec-table td {
+            padding: 15px 12px;
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .plan-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--dark-color);
+            padding: 10px;
+            background: var(--primary-light);
+            border-radius: 8px;
+        }
+
+        .highlight-item i {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        /* 인테리어 섹션 스타일 */
+        .interior-details {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .interior-section {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 30px;
+            padding: 40px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .interior-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .section-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .section-content h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .section-content h3 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .section-content p {
+            font-size: 16px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        /* VR 기능 스타일 */
+        .vr-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .vr-feature-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .vr-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .vr-feature-item:hover .vr-icon {
+            transform: scale(1.1);
+        }
+
+        .vr-feature-item h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .vr-feature-item p {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .vr-cta {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .cta-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .cta-box i.fa-headset {
+            font-size: 60px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .cta-box h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            font-size: 16px;
+            color: var(--gray-color);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(107, 78, 80, 0.4);
+        }
+
+        .cta-hours {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        /* 마감재 테이블 스타일 */
+        .material-table-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .material-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .material-table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+        }
+
+        .material-table thead th {
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .material-table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .material-table tbody tr:hover {
+            background: var(--primary-light);
+        }
+
+        .material-table td {
+            padding: 18px 20px;
+            font-size: 15px;
+        }
+
+        .category-cell {
+            background: var(--primary-light);
+            color: var(--primary-color);
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            border-right: 2px solid white;
+        }
+
+        .category-cell i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
         /* 반응형 */
         @media (max-width: 968px) {
             .land-features,
@@ -962,6 +1264,38 @@
             #locationMap {
                 height: 400px;
             }
+
+            .plan-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .interior-section {
+                grid-template-columns: 60px 1fr;
+                gap: 20px;
+                padding: 30px;
+            }
+
+            .section-number {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .vr-features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .material-table {
+                font-size: 13px;
+            }
+
+            .material-table th,
+            .material-table td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -975,6 +1309,62 @@
 
             #locationMap {
                 height: 300px;
+            }
+
+            .plan-specs {
+                padding: 25px;
+            }
+
+            .spec-table th,
+            .spec-table td {
+                padding: 12px 8px;
+                font-size: 13px;
+            }
+
+            .interior-section {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 25px;
+            }
+
+            .section-number {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                margin: 0 auto;
+            }
+
+            .vr-features {
+                grid-template-columns: 1fr;
+            }
+
+            .vr-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+
+            .cta-box {
+                padding: 30px 20px;
+            }
+
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 18px;
+            }
+
+            .material-table {
+                font-size: 12px;
+            }
+
+            .material-table th,
+            .material-table td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+
+            .category-cell i {
+                font-size: 18px;
             }
         }
     </style>
@@ -1145,282 +1535,134 @@
 
             <!-- 49타입 Content -->
             <div class="district-content active" id="type49">
-                <!-- 3단계: 1지구/2지구 선택 -->
-                <div class="tabs" style="margin-top: 30px;">
-                    <button class="tab-button active" data-subtab="type49-district1">1지구</button>
-                    <button class="tab-button" data-subtab="type49-district2">2지구</button>
+                <div class="land-hero" style="margin-bottom: 40px;">
+                    <h2>49㎡ 타입 평면도</h2>
+                    <p class="land-subtitle">공급면적 49.97㎡ / 전용면적 39.92㎡</p>
+                    <p class="land-description">
+                        효율적인 공간 배치로 실용성을 극대화한 2룸 구조입니다.
+                        거실과 주방이 하나로 연결된 개방형 구조로 넓은 공간감을 제공합니다.
+                    </p>
                 </div>
 
-            <!-- District 1 Content -->
-            <div class="district-content active" id="district1">
-                <div class="district-layout">
-                    <div class="district-image" data-aos="fade-right">
-                        <img src="Asset/1지구 이미지.png" alt="1지구 조감도">
+                <div class="plan-layout" data-aos="fade-up">
+                    <div class="plan-image">
+                        <img src="Asset/49실내.png" alt="49타입 평면도">
                     </div>
 
-                    <div class="info-cards" data-aos="fade-left">
-                        <!-- 1행 -->
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <div class="info-card-title">사업명</div>
-                            </div>
-                            <div class="info-card-content">
-                                삼도이동 공공주택 건립사업 1지구
-                            </div>
-                        </div>
+                    <div class="plan-specs">
+                        <h3><i class="fas fa-list-ul"></i> 주요 제원</h3>
+                        <table class="spec-table">
+                            <tr>
+                                <th><i class="fas fa-home"></i> 공급면적</th>
+                                <td>49.97㎡ (약 15.12평)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-ruler"></i> 전용면적</th>
+                                <td>39.92㎡ (약 12.07평)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-door-open"></i> 방 구성</th>
+                                <td>방 2개, 욕실 1개, 거실·주방</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-window-maximize"></i> 발코니</th>
+                                <td>안방 및 거실 확장형 발코니</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-bed"></i> 안방</th>
+                                <td>약 3.2평 (남향, 붙박이장)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-bed"></i> 작은방</th>
+                                <td>약 2.5평 (동향)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-couch"></i> 거실</th>
+                                <td>약 4.5평 (남향, 개방형 주방 연결)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-restroom"></i> 욕실</th>
+                                <td>샤워부스형 (세탁기 공간 포함)</td>
+                            </tr>
+                        </table>
 
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="info-card-title">위치</div>
-                            </div>
-                            <div class="info-card-content">
-                                제주특별자치도 삼도이동 1244-1번지
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-layer-group"></i>
-                                </div>
-                                <div class="info-card-title">지역지구</div>
-                            </div>
-                            <div class="info-card-content">
-                                준주거지역, 고도지구(30m이하)
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-tools"></i>
-                                </div>
-                                <div class="info-card-title">구조</div>
-                            </div>
-                            <div class="info-card-content">
-                                철근콘크리트(벽식구조)
-                            </div>
-                        </div>
-
-                        <!-- 2행 -->
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                                <div class="info-card-title">규모</div>
-                            </div>
-                            <div class="info-card-content">
-                                1개동, 지하1층(기계실) - 지상9층
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-home"></i>
-                                </div>
-                                <div class="info-card-title">세대수</div>
-                            </div>
-                            <div class="info-card-content">
-                                총 32세대 (49타입 8세대, 59타입 24세대)
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-expand-arrows-alt"></i>
-                                </div>
-                                <div class="info-card-title">대지면적</div>
-                            </div>
-                            <div class="info-card-content">
-                                1,419.2㎡
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-ruler-combined"></i>
-                                </div>
-                                <div class="info-card-title">건축면적</div>
-                            </div>
-                            <div class="info-card-content">
-                                467.25㎡
-                            </div>
+                        <div class="plan-highlights">
+                            <div class="highlight-item"><i class="fas fa-check-circle"></i> 신혼부부 및 소가족 최적화</div>
+                            <div class="highlight-item"><i class="fas fa-check-circle"></i> 맞통풍 환기 구조</div>
+                            <div class="highlight-item"><i class="fas fa-check-circle"></i> 개방형 주방으로 공간감 확대</div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- District 2 Content -->
-            <div class="district-content" id="district2">
-                <div class="district-layout">
-                    <div class="district-image" data-aos="fade-right">
-                        <img src="Asset/2지구 이미지.png" alt="2지구 조감도">
-                    </div>
-
-                    <div class="info-cards" data-aos="fade-left">
-                        <!-- 1행 -->
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <div class="info-card-title">사업명</div>
-                            </div>
-                            <div class="info-card-content">
-                                삼도이동 공공주택 건립사업 2지구
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="info-card-title">위치</div>
-                            </div>
-                            <div class="info-card-content">
-                                제주특별자치도 삼도이동 1246-1번지 외 4필지
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-layer-group"></i>
-                                </div>
-                                <div class="info-card-title">지역지구</div>
-                            </div>
-                            <div class="info-card-content">
-                                준주거지역, 고도지구(30m이하)
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-tools"></i>
-                                </div>
-                                <div class="info-card-title">구조</div>
-                            </div>
-                            <div class="info-card-content">
-                                철근콘크리트(벽식구조)
-                            </div>
-                        </div>
-
-                        <!-- 2행 -->
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                                <div class="info-card-title">규모</div>
-                            </div>
-                            <div class="info-card-content">
-                                1개동, 지하1층(기계실) - 지상9층
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-home"></i>
-                                </div>
-                                <div class="info-card-title">세대수</div>
-                            </div>
-                            <div class="info-card-content">
-                                총 40세대 (49타입 8세대, 59타입 32세대)
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-expand-arrows-alt"></i>
-                                </div>
-                                <div class="info-card-title">대지면적</div>
-                            </div>
-                            <div class="info-card-content">
-                                1,947.2㎡
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-card-header">
-                                <div class="info-card-icon">
-                                    <i class="fas fa-ruler-combined"></i>
-                                </div>
-                                <div class="info-card-title">건축면적</div>
-                            </div>
-                            <div class="info-card-content">
-                                586.91㎡
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
 
         <!-- 59타입 Tab Content -->
         <div class="main-tab-content" id="type59">
-            <div class="land-intro">
-                <!-- Hero Section -->
-                <div class="land-hero" data-aos="fade-up">
-                    <h2>토지임대부 분양주택</h2>
-                    <p class="land-subtitle">토지는 빌리고, 집은 내 것으로</p>
+            <div class="district-content">
+                <div class="land-hero" style="margin-bottom: 40px;">
+                    <h2>59㎡ 타입 평면도</h2>
+                    <p class="land-subtitle">공급면적 59.97㎡ / 전용면적 49.92㎡</p>
                     <p class="land-description">
-                        토지임대부 분양주택은 공공이 소유한 토지 위에 건물만 분양받아 주택을 소유하는 새로운 주거 모델입니다.
-                        토지 구입 비용이 없어 초기 자금 부담을 크게 줄이면서도, 건물은 완전한 내 소유로 안정적인 주거 환경을 제공합니다.
+                        넉넉한 공간 구성으로 쾌적한 생활이 가능한 3룸 구조입니다.
+                        가족 구성원 모두가 편안하게 생활할 수 있도록 설계되었습니다.
                     </p>
                 </div>
 
-                <!-- Image Section -->
-                <div class="land-image-section" data-aos="fade-up" data-aos-delay="100">
-                    <img src="Asset/토지임대부.png" alt="토지임대부 분양주택 안내">
-                </div>
-
-                <!-- Features Section -->
-                <div class="land-features" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-piggy-bank"></i>
-                        </div>
-                        <h3>확 줄어든 초기 자금 부담</h3>
-                        <p>토지 구입 비용 없이 건물 가격만 부담하여 일반 분양 대비 30~40% 저렴하게 내 집 마련이 가능합니다.</p>
+                <div class="plan-layout" data-aos="fade-up">
+                    <div class="plan-image">
+                        <img src="Asset/59실내.png" alt="59타입 평면도">
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <h3>진짜 내 집이 주는 안정감</h3>
-                        <p>건물은 완전한 소유권으로 자유롭게 매매, 증여, 상속이 가능하며 월세 걱정 없이 평생 거주할 수 있습니다.</p>
-                    </div>
+                    <div class="plan-specs">
+                        <h3><i class="fas fa-list-ul"></i> 주요 제원</h3>
+                        <table class="spec-table">
+                            <tr>
+                                <th><i class="fas fa-home"></i> 공급면적</th>
+                                <td>59.97㎡ (약 18.14평)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-ruler"></i> 전용면적</th>
+                                <td>49.92㎡ (약 15.10평)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-door-open"></i> 방 구성</th>
+                                <td>방 3개, 욕실 2개, 거실·주방</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-window-maximize"></i> 발코니</th>
+                                <td>안방·거실·주방 확장형 발코니</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-bed"></i> 안방</th>
+                                <td>약 4.0평 (남향, 붙박이장, 전용욕실)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-bed"></i> 작은방 1</th>
+                                <td>약 2.8평 (동향)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-bed"></i> 작은방 2</th>
+                                <td>약 2.5평 (동향)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-couch"></i> 거실</th>
+                                <td>약 5.5평 (남향, 넓은 거실 공간)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-utensils"></i> 주방</th>
+                                <td>독립형 주방 (약 3.0평)</td>
+                            </tr>
+                            <tr>
+                                <th><i class="fas fa-restroom"></i> 욕실</th>
+                                <td>안방 전용욕실 + 공용욕실 2개</td>
+                            </tr>
+                        </table>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-calculator"></i>
+                        <div class="plan-highlights">
+                            <div class="highlight-item"><i class="fas fa-check-circle"></i> 3~4인 가족 최적화</div>
+                            <div class="highlight-item"><i class="fas fa-check-circle"></i> 안방 전용 욕실 구비</div>
+                            <div class="highlight-item"><i class="fas fa-check-circle"></i> 독립형 주방으로 프라이버시 확보</div>
                         </div>
-                        <h3>합리적인 주거비 구조</h3>
-                        <p>토지 임대료는 시세의 1~2% 수준으로 관리비와 함께 납부하며, 매달 납부하는 월세보다 훨씬 저렴합니다.</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>공공이 보증하는 투명한 주거</h3>
-                        <p>제주특별자치도개발공사가 토지를 소유·관리하여 안정적이며, 임대료 인상률도 법으로 제한되어 있어 안심할 수 있습니다.</p>
                     </div>
                 </div>
             </div>
@@ -1428,35 +1670,62 @@
 
         <!-- 인테리어 Tab Content -->
         <div class="main-tab-content" id="interior">
-            <div class="location-section">
-                <!-- Map Container -->
-                <div class="map-container" data-aos="fade-up">
-                    <div id="locationMap"></div>
+            <div class="land-intro">
+                <div class="land-hero" data-aos="fade-up">
+                    <h2>인테리어 디자인</h2>
+                    <p class="land-subtitle">모던하고 실용적인 공간 연출</p>
+                    <p class="land-description">
+                        세련된 디자인과 기능성을 모두 갖춘 인테리어로 입주 즉시 편안한 생활이 가능합니다.
+                        공간의 효율성을 극대화하고 미적 감각을 더한 디자인입니다.
+                    </p>
                 </div>
 
-                <!-- Location Info -->
-                <div class="location-info" data-aos="fade-up" data-aos-delay="100">
-                    <div class="location-card">
-                        <div class="location-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="location-details">
-                            <h3>주소</h3>
-                            <p>제주특별자치도 제주시 삼도이동 1244-1</p>
-                            <a href="https://map.naver.com/p/search/제주특별자치도 제주시 삼도이동 1244-1" target="_blank" class="map-link">
-                                <i class="fas fa-external-link-alt"></i> 네이버 지도에서 크게 보기
-                            </a>
+                <div class="interior-details" data-aos="fade-up" data-aos-delay="100">
+                    <div class="interior-section">
+                        <div class="section-number">01</div>
+                        <div class="section-content">
+                            <h3><i class="fas fa-paint-roller"></i> 화이트 톤 인테리어</h3>
+                            <p>깔끔하고 밝은 화이트 톤의 벽지와 바닥재로 공간을 넓어 보이게 하고, 어떤 가구와도 잘 어울리는 베이직 컬러를 사용했습니다.</p>
                         </div>
                     </div>
 
-                    <div class="location-card">
-                        <div class="location-icon">
-                            <i class="fas fa-phone"></i>
+                    <div class="interior-section">
+                        <div class="section-number">02</div>
+                        <div class="section-content">
+                            <h3><i class="fas fa-layer-group"></i> 고급 원목 마루</h3>
+                            <p>내구성이 뛰어난 원목 무늬 강화마루를 시공하여 고급스러우면서도 관리가 편리합니다. 거실과 방 모두 동일한 마루로 통일감을 줍니다.</p>
                         </div>
-                        <div class="location-details">
-                            <h3>분양 문의</h3>
-                            <p>1588-0000</p>
-                            <p class="info-time">평일 09:00 - 18:00 (주말 및 공휴일 휴무)</p>
+                    </div>
+
+                    <div class="interior-section">
+                        <div class="section-number">03</div>
+                        <div class="section-content">
+                            <h3><i class="fas fa-lightbulb"></i> LED 조명 시스템</h3>
+                            <p>거실, 주방, 침실 등 각 공간의 용도에 맞는 LED 매입등과 간접조명을 설치하여 쾌적하고 분위기 있는 실내 환경을 조성합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="interior-section">
+                        <div class="section-number">04</div>
+                        <div class="section-content">
+                            <h3><i class="fas fa-door-closed"></i> 시스템 도어 및 샷시</h3>
+                            <p>단열과 방음 성능이 우수한 시스템 샷시와 모던한 디자인의 시스템 도어를 적용하여 쾌적한 주거 환경을 제공합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="interior-section">
+                        <div class="section-number">05</div>
+                        <div class="section-content">
+                            <h3><i class="fas fa-kitchen-set"></i> 시스템 주방가구</h3>
+                            <p>효율적인 수납 공간과 세련된 디자인을 갖춘 시스템 주방가구가 설치되어 있으며, 싱크대와 상하부장이 포함되어 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="interior-section">
+                        <div class="section-number">06</div>
+                        <div class="section-content">
+                            <h3><i class="fas fa-shoe-prints"></i> 현관 중문 및 신발장</h3>
+                            <p>현관에 중문과 신발장을 설치하여 실내 공간을 보호하고 수납 공간을 확보했습니다. 방문객의 프라이버시도 보호합니다.</p>
                         </div>
                     </div>
                 </div>
@@ -1466,12 +1735,48 @@
         <!-- 사이버 모델하우스 Tab Content -->
         <div class="main-tab-content" id="vr">
             <div class="land-intro">
-                <div class="land-hero" data-aos="fade-up">
+                <div class="land-hero" data-aos="fade-up" style="text-align: center; margin-bottom: 60px;">
                     <h2>사이버 모델하우스</h2>
-                    <p class="land-subtitle">360° VR로 체험하는 우리집</p>
-                    <p class="land-description">
-                        실제와 같은 공간감을 가상현실로 경험해보세요.
+                    <p class="land-subtitle">360° VR로 미리 체험하는 우리집</p>
+                    <p class="land-description" style="max-width: 800px; margin: 20px auto 0;">
+                        방문 없이도 실제 공간을 체험할 수 있는 VR 투어를 제공합니다.<br>
+                        컴퓨터나 모바일로 언제 어디서나 내 집을 미리 둘러보실 수 있습니다.
                     </p>
+                </div>
+
+                <div class="vr-features" data-aos="fade-up" data-aos-delay="100">
+                    <div class="vr-feature-item">
+                        <div class="vr-icon"><i class="fas fa-vr-cardboard"></i></div>
+                        <h4>360° VR 투어</h4>
+                        <p>실제 공간을 360도로 생생하게 체험</p>
+                    </div>
+                    <div class="vr-feature-item">
+                        <div class="vr-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h4>PC·모바일 지원</h4>
+                        <p>다양한 기기에서 편리하게 이용</p>
+                    </div>
+                    <div class="vr-feature-item">
+                        <div class="vr-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <h4>공간별 이동 기능</h4>
+                        <p>각 공간을 자유롭게 이동 가능</p>
+                    </div>
+                    <div class="vr-feature-item">
+                        <div class="vr-icon"><i class="fas fa-clock"></i></div>
+                        <h4>24시간 이용 가능</h4>
+                        <p>시간과 장소에 구애받지 않음</p>
+                    </div>
+                </div>
+
+                <div class="vr-cta" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cta-box">
+                        <i class="fas fa-headset"></i>
+                        <h3>VR 투어 체험하기</h3>
+                        <p>사이버 모델하우스는 분양 상담실에서 안내받으실 수 있습니다.</p>
+                        <a href="tel:1588-0000" class="cta-button">
+                            <i class="fas fa-phone"></i> 1588-0000
+                        </a>
+                        <p class="cta-hours">평일 09:00 - 18:00</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1480,10 +1785,127 @@
         <div class="main-tab-content" id="material">
             <div class="land-intro">
                 <div class="land-hero" data-aos="fade-up">
-                    <h2>마감재</h2>
-                    <p class="land-subtitle">프리미엄 마감재로 완성하는 품격</p>
+                    <h2>마감재 사양</h2>
+                    <p class="land-subtitle">품질과 내구성을 인정받은 프리미엄 자재</p>
                     <p class="land-description">
-                        고급스러운 마감재로 주거 공간의 가치를 높입니다.
+                        검증된 국내외 유명 브랜드의 마감재를 사용하여 고급스러운 주거 공간을 완성합니다.
+                        품질과 디자인을 모두 만족시키는 마감재로 가치있는 내 집을 만듭니다.
+                    </p>
+                </div>
+
+                <div class="material-table-container" data-aos="fade-up" data-aos-delay="100">
+                    <table class="material-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">구분</th>
+                                <th style="width: 30%;">부위</th>
+                                <th style="width: 50%;">사양</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3" class="category-cell"><i class="fas fa-th-large"></i><br><strong>바닥재</strong></td>
+                                <td>거실 및 침실</td>
+                                <td>8.0T 강화마루 (원목무늬)</td>
+                            </tr>
+                            <tr>
+                                <td>주방 / 욕실</td>
+                                <td>포세린 타일 (300×300mm)</td>
+                            </tr>
+                            <tr>
+                                <td>발코니</td>
+                                <td>300×300mm 포세린 타일</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="category-cell"><i class="fas fa-paint-brush"></i><br><strong>벽/천장재</strong></td>
+                                <td>거실 / 침실 벽</td>
+                                <td>실크벽지 (친환경 인증)</td>
+                            </tr>
+                            <tr>
+                                <td>주방 / 욕실 벽</td>
+                                <td>타일 및 수성페인트</td>
+                            </tr>
+                            <tr>
+                                <td>천장</td>
+                                <td>석고보드 위 수성페인트</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="category-cell"><i class="fas fa-door-open"></i><br><strong>문짝/창호</strong></td>
+                                <td>실내문</td>
+                                <td>ABS 시스템 도어 (모던 디자인)</td>
+                            </tr>
+                            <tr>
+                                <td>현관문</td>
+                                <td>3중 잠금장치 방화문 (지문인식)</td>
+                            </tr>
+                            <tr>
+                                <td>창호</td>
+                                <td>이중창 PVC 시스템 샷시 (단열/방음)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" class="category-cell"><i class="fas fa-faucet"></i><br><strong>욕실</strong></td>
+                                <td>양변기</td>
+                                <td>국산 로얄 양변기 (온수세정 기능)</td>
+                            </tr>
+                            <tr>
+                                <td>세면기</td>
+                                <td>수납형 세면대 (거울 및 조명 포함)</td>
+                            </tr>
+                            <tr>
+                                <td>수전</td>
+                                <td>국산 브랜드 믹서 수전 (샤워헤드 포함)</td>
+                            </tr>
+                            <tr>
+                                <td>욕조/샤워</td>
+                                <td>인조대리석 욕조 또는 샤워부스</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" class="category-cell"><i class="fas fa-sink"></i><br><strong>주방</strong></td>
+                                <td>상판</td>
+                                <td>인조대리석 상판 (내열/내스크래치)</td>
+                            </tr>
+                            <tr>
+                                <td>싱크볼</td>
+                                <td>스텐레스 언더싱크볼</td>
+                            </tr>
+                            <tr>
+                                <td>수전</td>
+                                <td>절수형 싱크 수전 (회전형)</td>
+                            </tr>
+                            <tr>
+                                <td>후드</td>
+                                <td>800mm 시스템 후드 (LED 조명)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" class="category-cell"><i class="fas fa-plug"></i><br><strong>전기/통신</strong></td>
+                                <td>콘센트</td>
+                                <td>3구 접지형 콘센트 (안전형)</td>
+                            </tr>
+                            <tr>
+                                <td>스위치</td>
+                                <td>3Way 스위치 (침실 복도 적용)</td>
+                            </tr>
+                            <tr>
+                                <td>조명</td>
+                                <td>LED 매입등 및 인테리어등</td>
+                            </tr>
+                            <tr>
+                                <td>통신</td>
+                                <td>초고속인터넷 및 전화 단자</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-highlight" data-aos="fade-up" style="margin: 60px auto; max-width: 1200px;">
+                    <h3 style="font-size: 18px; margin-bottom: 15px; color: var(--primary-color);">
+                        <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+                        마감재 안내사항
+                    </h3>
+                    <p style="font-size: 14px; line-height: 1.8; color: var(--gray-color);">
+                        • 상기 마감재는 자재 수급 상황에 따라 동등 이상의 제품으로 변경될 수 있습니다.<br>
+                        • 마감재 색상 및 디자인은 실제 시공 시 차이가 있을 수 있으니 모델하우스에서 확인하시기 바랍니다.<br>
+                        • 발코니 확장 시 마감재 사양이 일부 변경될 수 있습니다.
                     </p>
                 </div>
             </div>
